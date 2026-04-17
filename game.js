@@ -442,10 +442,10 @@ function renderVictory() {
       <div class="victory-sep">────────────────────────────────────</div>
       <div class="victory-score">Respuestas correctas: ${gameState.score.correct} / ${TOTAL_QUESTIONS}</div>
       <div class="victory-actions">
-        <a href="https://esdata.info" target="_blank" rel="noopener noreferrer"
+        <a href="https://radbg.github.io/quieroelegir" target="_blank" rel="noopener noreferrer"
            class="btn-primary btn-victory-link">
           [ CONOCE TUS DERECHOS ELECTORALES ]<br>
-          <span class="btn-sub">→ esdata.info</span>
+          <span class="btn-sub">→ quieroelegir</span>
         </a>
         <button class="btn-secondary" onclick="restartGame()">[ JUGAR OTRA VEZ ]</button>
       </div>
