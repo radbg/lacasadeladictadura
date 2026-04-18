@@ -105,9 +105,10 @@ function renderIntro() {
         <h1 class="main-title">LA CASA DE LA DICTADURA</h1>
         <p class="subtitle">Estás encerrado. La única salida son las elecciones libres.</p>
         <div class="intro-rules">
-          <p>Seis poderes públicos. Seis habitaciones capturadas.</p>
+          <p>5 poderes públicos, 5 habitaciones capturadas.</p>
           <p>Cada candado se abre solo con conocimiento.</p>
-          <p>Tienes <strong>3 vidas</strong> por cuarto. Piérdelas todas y serás detenido.</p>
+          <p>Tienes <strong>3 vidas</strong> por juego. Piérdelas y no podrás escapar de la dictadura.</p>
+          <p>Piensa bien las respuestas.</p>
         </div>
         <div class="room-counter">CUARTO 0 / 6</div>
         <button class="btn-primary" onclick="startGame()">[ ENTRAR ]</button>

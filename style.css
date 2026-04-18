@@ -126,12 +126,14 @@ html, body {
 .intro-rules {
   max-width: 440px;
   text-align: left;
-  border-left: 2px solid var(--mid);
+  border-left: 2px solid var(--gold);
   padding-left: 16px;
-  color: #999;
+  color: var(--gold);
+  font-size: 16px;
+  line-height: 1.8;
 }
-.intro-rules p { margin-bottom: 6px; }
-.intro-rules strong { color: var(--gold); font-weight: normal; }
+.intro-rules p { margin-bottom: 8px; }
+.intro-rules strong { color: var(--gold); font-weight: bold; }
 
 .room-counter {
   font-size: 11px;

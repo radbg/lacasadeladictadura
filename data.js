@@ -9,7 +9,7 @@ const ROOMS = [
     name: "La Presidencia",
     image: "images/room-1-presidencia.jpg",
     isTransition: false,
-    ambience: "Estás en el despacho. Las paredes están tapizadas con retratos. El escritorio tiene decretos sin fecha. Huele a papel mojado y miedo.",
+    ambience: "Estás en el despacho presidencial del dictador.",
     questions: [
       {
         text: "¿Puede el Presidente de Venezuela ser reelegido indefinidamente según la Constitución de 1999?",
@@ -44,7 +44,7 @@ const ROOMS = [
     name: "La Asamblea Nacional",
     image: "images/room-2-asamblea.jpg",
     isTransition: false,
-    ambience: "Un hemiciclo vacío. Las curules están rotas. En el podio hay un cartel que dice: 'EN DESACATO'. La luz parpadeante es lo único que se mueve.",
+    ambience: "Estás en el hemiciclo de la Asamblea Nacional, silenciada y en desacato.",
     questions: [
       {
         text: "¿Puede la Asamblea Nacional aprobar una ley sin el voto de la mayoría de sus miembros?",
@@ -79,7 +79,7 @@ const ROOMS = [
     name: "El TSJ",
     image: "images/room-3-tsj.jpg",
     isTransition: false,
-    ambience: "La sala de justicia. Las balanzas están inclinadas. Los expedientes están sellados con 'PENDIENTE'. Un reloj marcando siempre la misma hora.",
+    ambience: "Estás en la sala del Tribunal Supremo de Justicia, controlado por el régimen.",
     questions: [
       {
         text: "¿Los magistrados del Tribunal Supremo de Justicia son elegidos por el pueblo en Venezuela?",
@@ -114,7 +114,7 @@ const ROOMS = [
     name: "La Fiscalía",
     image: "images/room-4-fiscalia.jpg",
     isTransition: false,
-    ambience: "Una oficina con archivadores metálicos. La mitad están vacíos, la otra mitad, cerrados con llave. En el suelo, papeles con nombres tachados.",
+    ambience: "Estás en la sede de la Fiscalía General, donde los expedientes se abren y cierran según convenga.",
     questions: [
       {
         text: "¿El Fiscal General de Venezuela puede ser removido por el Presidente de la República?",
@@ -149,7 +149,7 @@ const ROOMS = [
     name: "El CNE",
     image: "images/room-5-cne.jpg",
     isTransition: false,
-    ambience: "Una sala con urnas selladas. Los techos son bajos. En una pizarra, números que no coinciden con nada. Hay formularios en blanco apilados hasta el techo.",
+    ambience: "Estás en la sala del Consejo Nacional Electoral, donde los números no siempre coinciden con la verdad.",
     questions: [
       {
         text: "¿Cuántos rectores principales tiene el Consejo Nacional Electoral?",
@@ -189,7 +189,7 @@ const ROOMS = [
     isTransition: true,
     iframeUrl: "https://radbg.github.io/quieroelegir",
     timerSeconds: 60,
-    ambience: "Encontraste algo inesperado. En medio de la oscuridad, alguien dejó un libro. No es un decreto. No es una sentencia. Es un plan.",
+    ambience: "Encontraste una biblioteca oculta. Alguien dejó aquí un plan para recuperar las elecciones.",
     questions: [
       {
         text: "Según quieroelegir, ¿qué porcentaje de los 7.9 millones de venezolanos en el exterior SÍ puede votar hoy en día?",
@@ -224,7 +224,7 @@ const ROOMS = [
     name: "La FANB",
     image: "images/room-7-fanb.jpg",
     isTransition: false,
-    ambience: "Un pasillo largo. Al fondo, una puerta con doce candados. En las paredes, reglamentos plastificados. El suelo resuena con cada paso. Es la última puerta.",
+    ambience: "Estás ante el último obstáculo: la Fuerza Armada. Esta es la puerta final.",
     questions: [
       {
         text: "¿La Fuerza Armada venezolana puede ejercer el derecho al voto?",
