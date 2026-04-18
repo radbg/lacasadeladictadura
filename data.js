@@ -224,7 +224,7 @@ const ROOMS = [
     name: "La FANB",
     image: "images/room-7-fanb.jpg",
     isTransition: false,
-    ambience: "Un pasillo largo. Al fondo, una puerta con doce cerrojos. En las paredes, reglamentos plastificados. El suelo resuena con cada paso. Es la última puerta.",
+    ambience: "Un pasillo largo. Al fondo, una puerta con doce candados. En las paredes, reglamentos plastificados. El suelo resuena con cada paso. Es la última puerta.",
     questions: [
       {
         text: "¿La Fuerza Armada venezolana puede ejercer el derecho al voto?",

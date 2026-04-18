@@ -106,7 +106,7 @@ function renderIntro() {
         <p class="subtitle">Estás encerrado. La única salida son las elecciones libres.</p>
         <div class="intro-rules">
           <p>Seis poderes públicos. Seis habitaciones capturadas.</p>
-          <p>Cada cerrojo se abre solo con conocimiento.</p>
+          <p>Cada candado se abre solo con conocimiento.</p>
           <p>Tienes <strong>3 vidas</strong> por cuarto. Piérdelas todas y serás detenido.</p>
         </div>
         <div class="room-counter">CUARTO 0 / 6</div>
