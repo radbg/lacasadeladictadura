@@ -381,7 +381,7 @@ function showDoorOpening() {
     if (i < locks.length) { locks[i].textContent = '░'; locks[i].classList.add('unlocked'); i++; }
     else {
       clearInterval(iv);
-      document.getElementById('door-status').textContent = '[CERROJO LIBERADO]';
+      document.getElementById('door-status').textContent = '[CANDADO LIBERADO]';
       document.getElementById('door-adv').textContent    = 'Avanzando...';
       setTimeout(advanceRoom, 1200);
     }
