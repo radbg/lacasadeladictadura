@@ -36,13 +36,17 @@ function randomRepression() {
 // ─── UI builders ─────────────────────────────────────────────
 
 function progressBarHTML(activeIndex) {
-  const cells = Array.from({ length: 6 }, (_, i) => {
+  const cells = [];
+  for (let i = 0; i < 5; i++) {
     let cls, label;
-    if (i < activeIndex)       { cls = 'completed'; label = '✓'; }
-    else if (i === activeIndex) { cls = 'current';   label = i + 1; }
-    else                        { cls = 'pending';   label = i + 1; }
-    return `<div class="progress-cell ${cls}">${label}</div>`;
-  });
+    if (i < activeIndex)        { cls = 'completed'; label = '✓'; }
+    else if (i === activeIndex)  { cls = 'current';   label = i + 1; }
+    else                         { cls = 'pending';   label = i + 1; }
+    cells.push(`<div class="progress-cell ${cls}">${label}</div>`);
+  }
+  // últimas dos sorpresa: biblioteca + FANB
+  cells.push(`<div class="progress-cell ${activeIndex >= 5 ? 'completed' : 'pending'}">?</div>`);
+  cells.push(`<div class="progress-cell ${activeIndex === 5 ? 'current'  : 'pending'}">?</div>`);
   return `<div class="progress-bar">${cells.join('')}</div>`;
 }
 
@@ -432,8 +436,8 @@ function renderVictory() {
 ║   HAS ESCAPADO DE LA DICTADURA  ║
 ╚══════════════════════════════════╝</pre>
       <div class="victory-text">
-        <p>Atravesaste los 6 poderes capturados<br>del Estado venezolano.</p>
-        <p>Conociste el plan.<br>Respondiste con verdad.<br>La última puerta cedió.</p>
+        <p>Atravesaste los 5 poderes del Estado venezolano controlados por el régimen y pusiste a los militares en su lugar.</p>
+        <p>Respondiste con la verdad.<br>La última puerta cedió.</p>
         <p>La información es resistencia.<br>Conocer tus derechos es el primer<br>paso para ejercerlos.</p>
       </div>
       <div class="victory-sep">────────────────────────────────────</div>
@@ -441,7 +445,7 @@ function renderVictory() {
       <div class="victory-actions">
         <a href="https://radbg.github.io/quieroelegir" target="_blank" rel="noopener noreferrer"
            class="btn-primary btn-victory-link">
-          [ CONOCE TUS DERECHOS ELECTORALES ]<br>
+          [ QUIERO ELEGIR ]<br>
           <span class="btn-sub">→ quieroelegir</span>
         </a>
         <button class="btn-secondary" onclick="restartGame()">[ JUGAR OTRA VEZ ]</button>

@@ -44,7 +44,7 @@ const ROOMS = [
     name: "La Asamblea Nacional",
     image: "images/room-2-asamblea.jpg",
     isTransition: false,
-    ambience: "Estás en el hemiciclo de la Asamblea Nacional, silenciada y en desacato.",
+    ambience: "Estás en el hemiciclo de la Asamblea Nacional, cooptado por el poder Ejecutivo y con curules de sobra.",
     questions: [
       {
         text: "¿Puede la Asamblea Nacional aprobar una ley sin el voto de la mayoría de sus miembros?",
