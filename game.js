@@ -286,7 +286,6 @@ function closeBook() {
   gameState.libraryRead     = true;
   gameState.libraryTimerDone = true;
   gameState.currentQuestion  = 0;
-  gameState.lives            = 3;
   renderLibraryQuestions();
 }
 
@@ -331,7 +330,7 @@ function handleAnswer(isCorrect, btnEl) {
     } else {
       flashRepression(() => {
         getCurrentRoom().isTransition ? renderLibraryQuestions() : renderRoom();
-        showRepMsg(msg);
+        showRepMsg('⚠ HAS PERDIDO UNA VIDA. ' + msg);
       });
     }
   }
@@ -391,7 +390,6 @@ function showDoorOpening() {
 function advanceRoom() {
   gameState.currentRoom++;
   gameState.currentQuestion = 0;
-  gameState.lives            = 3;
   gameState.currentRoom >= ROOMS.length ? renderVictory() : renderRoom();
 }
 
@@ -415,14 +413,12 @@ function renderGameOver() {
          es un riesgo que no te puedes<br>
          permitir."
       </blockquote>
-      <button class="btn-primary" onclick="retryRoom()">[ INTENTAR NUEVAMENTE ]</button>
+      <button class="btn-primary" onclick="retryRoom()">[ COMENZAR DESDE EL INICIO ]</button>
     </div>`;
 }
 
 function retryRoom() {
-  gameState.currentQuestion = 0;
-  gameState.lives = 3;
-  getCurrentRoom().isTransition ? renderLibraryQuestions() : renderRoom();
+  restartGame();
 }
 
 // ─── Victory ─────────────────────────────────────────────────
