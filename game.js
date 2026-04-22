@@ -404,15 +404,8 @@ function nextQuestion() {
 // ─── Sound FX (Web Audio API) ────────────────────────────────
 
 function iframeScroll(delta) {
-  const frame = document.getElementById('site-frame');
-  if (!frame) return;
-  try {
-    frame.contentWindow.scrollBy({ top: delta, behavior: 'smooth' });
-  } catch(e) {
-    // fallback: scroll el contenedor wrapper
-    const wrap = frame.closest('.iframe-wrap');
-    if (wrap) wrap.scrollTop += delta;
-  }
+  const wrap = document.querySelector('.iframe-wrap');
+  if (wrap) wrap.scrollBy({ top: delta, behavior: 'smooth' });
 }
 
 function playCandadoClick() {

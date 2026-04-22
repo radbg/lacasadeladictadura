@@ -468,7 +468,14 @@ html, body {
 }
 .btn-continue-lib:hover { background: var(--gold); color: var(--black); }
 
-.iframe-wrap { position: relative; flex: 1; padding: 6px 8px; }
+.iframe-wrap {
+  position: relative;
+  flex: 1;
+  padding: 6px 8px;
+  height: 75vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
 .iframe-scroll-btns {
   position: absolute;
@@ -500,7 +507,7 @@ html, body {
 
 #site-frame {
   width: 100%;
-  height: 75vh;
+  height: 2400px;
   border: 1px solid var(--gold-border);
   border-radius: 3px;
   background: #0f0f0f;
