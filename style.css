@@ -36,8 +36,7 @@ html, body {
 
 /* ── App container ───────────────────────────────────────── */
 #app {
-  max-width: 900px;
-  margin: 0 auto;
+  width: 100%;
   min-height: 100vh;
   position: relative;
 }
@@ -193,6 +192,13 @@ html, body {
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.room-bottom-panel > * {
+  width: 100%;
+  max-width: 780px;
 }
 
 /* ── Room header ─────────────────────────────────────────── */
