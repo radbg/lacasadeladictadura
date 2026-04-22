@@ -496,7 +496,7 @@ function renderVictory() {
       <div class="victory-text">
         <p>Atravesaste los 5 poderes del Estado venezolano controlados por el régimen y pusiste a los militares en su lugar.</p>
         <p>Respondiste con la verdad.<br>La última puerta cedió.</p>
-        <p>La información es resistencia.<br>Conocer tus derechos es el primer<br>paso para ejercerlos.</p>
+        <p>La información es resistencia.<br>Conocer tus derechos es fundamental<br>para exigir que se cumplan.</p>
       </div>
       <div class="victory-sep">────────────────────────────────────</div>
       <div class="victory-score">Respuestas correctas: ${gameState.score.correct} / ${TOTAL_QUESTIONS}</div>
