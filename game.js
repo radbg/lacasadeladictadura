@@ -572,6 +572,7 @@ function startGame() {
     libraryRead: false, libraryTimerDone: false,
     score: { correct: 0 }
   });
+  playDoorCreak();
   renderRoom();
 }
 
