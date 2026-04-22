@@ -14,6 +14,21 @@ const gameState = {
 let libraryTimerInterval = null;
 let _doorSoundToggle = 0; // alterna entre lock-click y door-creak
 
+// ─── Música de fondo ─────────────────────────────────────────
+const _bgm = new Audio('sounds/theme.mp3');
+_bgm.loop   = true;
+_bgm.volume = 0.45;
+
+function startBGM() {
+  _bgm.play().catch(() => {});
+}
+
+function toggleMute() {
+  _bgm.muted = !_bgm.muted;
+  const btn = document.getElementById('mute-btn');
+  if (btn) btn.textContent = _bgm.muted ? '🔇' : '🔊';
+}
+
 const NUMBERED_ROOMS  = ROOMS.filter(r => !r.isTransition);
 const TOTAL_QUESTIONS = ROOMS.reduce((s, r) => s + r.questions.length, 0);
 
@@ -477,6 +492,7 @@ function startGame() {
     libraryRead: false, libraryTimerDone: false,
     score: { correct: 0 }
   });
+  startBGM();
   playDoorCreak();
   renderRoom();
 }
