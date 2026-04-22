@@ -12,6 +12,7 @@ const gameState = {
 };
 
 let libraryTimerInterval = null;
+let _doorSoundToggle = 0; // alterna entre lock-click y door-creak
 
 const NUMBERED_ROOMS  = ROOMS.filter(r => !r.isTransition);
 const TOTAL_QUESTIONS = ROOMS.reduce((s, r) => s + r.questions.length, 0);
@@ -390,14 +391,16 @@ function showDoorOpening() {
     </div>`;
 
   const locks = document.querySelectorAll('.lock');
+  const useLock = (_doorSoundToggle % 2 === 0);
+  _doorSoundToggle++;
   let i = 0;
   const iv = setInterval(() => {
     if (i < locks.length) {
-      playCandadoClick();
+      if (useLock) playCandadoClick();
       locks[i].textContent = '░'; locks[i].classList.add('unlocked'); i++;
     } else {
       clearInterval(iv);
-      playDoorCreak();
+      if (!useLock) playDoorCreak();
       document.getElementById('door-status').textContent = '[CANDADO LIBERADO]';
       document.getElementById('door-adv').textContent    = 'Avanzando...';
       setTimeout(advanceRoom, 1800);
