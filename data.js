@@ -17,7 +17,7 @@ const ROOMS = [
           { text: "No, la Constitución prohíbe más de dos períodos consecutivos", correct: false },
           { text: "Sí, una enmienda de 2009 eliminó ese límite", correct: true }
         ],
-        fact: "La Enmienda N°1 de 2009, aprobada en referéndum, eliminó los límites de reelección para todos los cargos de elección popular."
+        fact: "La Enmienda N°1 de 2009 eliminó los límites de reelección, pero fue aprobada de forma inconstitucional: una reforma idéntica ya había sido rechazada en referéndum en 2007. El artículo 345 de la CRBV prohíbe expresamente presentar ante la Asamblea Nacional cualquier iniciativa de reforma que haya sido rechazada por el pueblo durante el mismo período constitucional."
       },
       {
         text: "¿El Presidente puede disolver la Asamblea Nacional en Venezuela?",
