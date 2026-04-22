@@ -277,6 +277,10 @@ function renderLibraryIframe() {
           <iframe id="site-frame" src="${room.iframeUrl}" title="quieroelegir.org"
             sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox">
           </iframe>
+          <div class="iframe-scroll-btns">
+            <button class="iframe-scroll-btn" onclick="iframeScroll(-400)" title="Subir">▲</button>
+            <button class="iframe-scroll-btn" onclick="iframeScroll(400)"  title="Bajar">▼</button>
+          </div>
           <div class="iframe-fallback" id="iframe-fallback">
             <p>No se pudo cargar quieroelegir.org en este marco.</p>
             <p>Visítala directamente:</p>
@@ -398,6 +402,18 @@ function nextQuestion() {
 }
 
 // ─── Sound FX (Web Audio API) ────────────────────────────────
+
+function iframeScroll(delta) {
+  const frame = document.getElementById('site-frame');
+  if (!frame) return;
+  try {
+    frame.contentWindow.scrollBy({ top: delta, behavior: 'smooth' });
+  } catch(e) {
+    // fallback: scroll el contenedor wrapper
+    const wrap = frame.closest('.iframe-wrap');
+    if (wrap) wrap.scrollTop += delta;
+  }
+}
 
 function playCandadoClick() {
   try { new Audio('sounds/lock-click.mp3').play(); } catch(e) {}
