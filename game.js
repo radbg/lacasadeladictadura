@@ -366,110 +366,12 @@ function nextQuestion() {
 
 // ─── Sound FX (Web Audio API) ────────────────────────────────
 
-function _getAudioCtx() {
-  if (!window._sfxCtx) {
-    window._sfxCtx = new (window.AudioContext || window.webkitAudioContext)();
-  }
-  // Reanudar si el contexto fue suspendido por política del navegador
-  if (window._sfxCtx.state === 'suspended') window._sfxCtx.resume();
-  return window._sfxCtx;
-}
-
-function _distortionCurve(amount) {
-  const n = 512, c = new Float32Array(n);
-  for (let i = 0; i < n; i++) {
-    const x = (i * 2) / (n - 1) - 1;
-    c[i] = (Math.PI + amount) * x / (Math.PI + amount * Math.abs(x));
-  }
-  return c;
-}
-
-// Click metálico: golpe corto + tick de ruido (cadenas independientes)
 function playCandadoClick() {
-  try {
-    const ctx = _getAudioCtx();
-    const t   = ctx.currentTime;
-
-    // Thud grave (perno metálico)
-    const o1 = ctx.createOscillator();
-    const g1 = ctx.createGain();
-    o1.type = 'sine';
-    o1.frequency.setValueAtTime(200, t);
-    o1.frequency.exponentialRampToValueAtTime(40, t + 0.12);
-    g1.gain.setValueAtTime(0.8, t);
-    g1.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
-    o1.connect(g1); g1.connect(ctx.destination);
-    o1.start(t); o1.stop(t + 0.12);
-
-    // Tick metálico agudo (ruido con envolvente muy corta)
-    const sr   = ctx.sampleRate;
-    const buf  = ctx.createBuffer(1, Math.floor(sr * 0.04), sr);
-    const d    = buf.getChannelData(0);
-    for (let i = 0; i < d.length; i++) {
-      d[i] = (Math.random() * 2 - 1) * Math.exp(-i / (d.length * 0.25));
-    }
-    const src = ctx.createBufferSource(); src.buffer = buf;
-    const hp  = ctx.createBiquadFilter();
-    hp.type = 'highpass'; hp.frequency.value = 3000;
-    const g2  = ctx.createGain(); g2.gain.value = 1.2;
-    src.connect(hp); hp.connect(g2); g2.connect(ctx.destination);
-    src.start(t);
-  } catch(e) {}
+  try { new Audio('sounds/lock-click.mp3').play(); } catch(e) {}
 }
 
-// Chirrido de bisagras + golpe de puerta (cadenas completamente separadas)
 function playDoorCreak() {
-  try {
-    const ctx = _getAudioCtx();
-    const t   = ctx.currentTime;
-
-    // 1. Golpe de puerta pesada
-    const boom = ctx.createOscillator();
-    const gB   = ctx.createGain();
-    boom.type = 'sine';
-    boom.frequency.setValueAtTime(80, t);
-    boom.frequency.exponentialRampToValueAtTime(20, t + 0.45);
-    gB.gain.setValueAtTime(1.0, t);
-    gB.gain.exponentialRampToValueAtTime(0.001, t + 0.45);
-    boom.connect(gB); gB.connect(ctx.destination);
-    boom.start(t); boom.stop(t + 0.45);
-
-    // 2. Chirrido principal — cadena propia: osc → ws → bp → gain → dest
-    const c1   = ctx.createOscillator();
-    const ws1  = ctx.createWaveShaper();
-    const bp1  = ctx.createBiquadFilter();
-    const gC1  = ctx.createGain();
-    c1.type = 'sawtooth';
-    c1.frequency.setValueAtTime(300, t + 0.05);
-    c1.frequency.linearRampToValueAtTime(180, t + 0.7);
-    c1.frequency.linearRampToValueAtTime(220, t + 1.1);
-    c1.frequency.linearRampToValueAtTime(70,  t + 2.0);
-    ws1.curve = _distortionCurve(120);
-    bp1.type = 'bandpass'; bp1.frequency.value = 600; bp1.Q.value = 1.2;
-    gC1.gain.setValueAtTime(0, t + 0.05);
-    gC1.gain.linearRampToValueAtTime(0.4, t + 0.2);
-    gC1.gain.setValueAtTime(0.4, t + 1.6);
-    gC1.gain.linearRampToValueAtTime(0, t + 2.0);
-    c1.connect(ws1); ws1.connect(bp1); bp1.connect(gC1); gC1.connect(ctx.destination);
-    c1.start(t + 0.05); c1.stop(t + 2.0);
-
-    // 3. Armónico del chirrido — cadena propia independiente
-    const c2   = ctx.createOscillator();
-    const ws2  = ctx.createWaveShaper();
-    const bp2  = ctx.createBiquadFilter();
-    const gC2  = ctx.createGain();
-    c2.type = 'sawtooth';
-    c2.frequency.setValueAtTime(460, t + 0.2);
-    c2.frequency.linearRampToValueAtTime(280, t + 0.9);
-    c2.frequency.linearRampToValueAtTime(120, t + 2.2);
-    ws2.curve = _distortionCurve(100);
-    bp2.type = 'bandpass'; bp2.frequency.value = 800; bp2.Q.value = 1.0;
-    gC2.gain.setValueAtTime(0, t + 0.2);
-    gC2.gain.linearRampToValueAtTime(0.22, t + 0.4);
-    gC2.gain.linearRampToValueAtTime(0, t + 2.2);
-    c2.connect(ws2); ws2.connect(bp2); bp2.connect(gC2); gC2.connect(ctx.destination);
-    c2.start(t + 0.2); c2.stop(t + 2.2);
-  } catch(e) {}
+  try { new Audio('sounds/door-creak.mp3').play(); } catch(e) {}
 }
 
 // ─── Door animation ──────────────────────────────────────────
