@@ -19,14 +19,29 @@ const _bgm = new Audio('sounds/theme.mp3');
 _bgm.loop   = true;
 _bgm.volume = 0.45;
 
+const _victoryBgm = new Audio('sounds/theme-victory.mp3');
+_victoryBgm.loop   = true;
+_victoryBgm.volume = 0.55;
+
 function startBGM() {
+  _victoryBgm.pause();
+  _victoryBgm.currentTime = 0;
   _bgm.play().catch(() => {});
 }
 
+function startVictoryBGM() {
+  _bgm.pause();
+  _bgm.currentTime = 0;
+  if (!_bgm.muted) _victoryBgm.play().catch(() => {});
+  else _victoryBgm.muted = true;
+}
+
 function toggleMute() {
-  _bgm.muted = !_bgm.muted;
+  const muted = !_bgm.muted;
+  _bgm.muted = muted;
+  _victoryBgm.muted = muted;
   const btn = document.getElementById('mute-btn');
-  if (btn) btn.textContent = _bgm.muted ? '🔇' : '🔊';
+  if (btn) btn.textContent = muted ? '🔇' : '🔊';
 }
 
 const NUMBERED_ROOMS  = ROOMS.filter(r => !r.isTransition);
@@ -462,6 +477,7 @@ function retryRoom() {
 // ─── Victory ─────────────────────────────────────────────────
 
 function renderVictory() {
+  startVictoryBGM();
   document.getElementById('app').innerHTML = `
     <div class="screen victory-screen">
       <pre class="victory-art">
