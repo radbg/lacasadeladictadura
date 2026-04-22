@@ -381,6 +381,25 @@ html, body {
    ══════════════════════════════════════════════════════════ */
 .library-bg .room-scene { display: none; }
 
+.library-discovery {
+  border-left: 3px solid var(--gold);
+  padding: 14px 18px;
+  background: rgba(200,168,75,0.06);
+  border-radius: 0 3px 3px 0;
+}
+.library-discovery-tag {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.library-discovery-text {
+  color: #ccc;
+  font-size: 15px;
+  line-height: 1.75;
+  font-style: italic;
+}
+
 .library-label {
   font-size: 12px;
   letter-spacing: 3px;

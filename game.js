@@ -178,12 +178,14 @@ function renderLibrary() {
           <div class="library-label">░░░░░  LA BIBLIOTECA  ░░░░░</div>
         </div>
 
-        <div class="room-scene">
-          <p class="room-ambience">"${room.ambience}"</p>
-        </div>
-
-        <div class="room-bottom-panel" style="text-align:center">
-          <button class="btn-primary" onclick="openBook()">[ ABRIR EL LIBRO ]</button>
+        <div class="room-bottom-panel">
+          <div class="library-discovery">
+            <div class="library-discovery-tag">⚠ CUARTO SECRETO ENCONTRADO</div>
+            <p class="library-discovery-text">Te desviaste del camino. En medio de la Casa de la Dictadura encontraste una biblioteca oculta. Alguien dejó aquí un libro que no es un decreto ni una sentencia — es un plan para recuperar las elecciones. Léelo. Puede ser la clave para salir.</p>
+          </div>
+          <div style="text-align:center; margin-top: 20px;">
+            <button class="btn-primary" onclick="openBook()">[ ABRIR EL LIBRO ]</button>
+          </div>
         </div>
 
       </div>`;
