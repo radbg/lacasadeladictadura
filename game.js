@@ -521,6 +521,7 @@ function renderVictory() {
 // ─── Init ────────────────────────────────────────────────────
 
 function startGame() {
+  _doorSoundToggle = 1; // primera transición usará chirrido; el creak de inicio ya sonó
   Object.assign(gameState, {
     currentRoom: 0, currentQuestion: 0, lives: 3,
     libraryRead: false, libraryTimerDone: false,
@@ -532,6 +533,7 @@ function startGame() {
 }
 
 function restartGame() {
+  _doorSoundToggle = 0;
   if (libraryTimerInterval) { clearInterval(libraryTimerInterval); libraryTimerInterval = null; }
   Object.assign(gameState, {
     currentRoom: 0, currentQuestion: 0, lives: 3,
