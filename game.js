@@ -364,12 +364,108 @@ function nextQuestion() {
   }
 }
 
+// ─── Sound FX (Web Audio API) ────────────────────────────────
+
+function _getAudioCtx() {
+  if (!window._sfxCtx) {
+    window._sfxCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  return window._sfxCtx;
+}
+
+function playCandadoClick() {
+  try {
+    const ctx = _getAudioCtx();
+    const t   = ctx.currentTime;
+
+    // Impacto metálico grave
+    const osc  = ctx.createOscillator();
+    const gOsc = ctx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(110, t);
+    osc.frequency.exponentialRampToValueAtTime(35, t + 0.18);
+    gOsc.gain.setValueAtTime(0.45, t);
+    gOsc.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+    osc.connect(gOsc); gOsc.connect(ctx.destination);
+    osc.start(t); osc.stop(t + 0.18);
+
+    // Transiente de clic metálico (ruido filtrado)
+    const buf  = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.06), ctx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let j = 0; j < data.length; j++) data[j] = Math.random() * 2 - 1;
+    const src  = ctx.createBufferSource();
+    src.buffer = buf;
+    const bp   = ctx.createBiquadFilter();
+    bp.type = 'bandpass'; bp.frequency.value = 1400; bp.Q.value = 3;
+    const gN   = ctx.createGain();
+    gN.gain.setValueAtTime(0.7, t);
+    gN.gain.exponentialRampToValueAtTime(0.001, t + 0.06);
+    src.connect(bp); bp.connect(gN); gN.connect(ctx.destination);
+    src.start(t);
+  } catch(e) {}
+}
+
+function playDoorCreak() {
+  try {
+    const ctx = _getAudioCtx();
+    const t   = ctx.currentTime;
+
+    // Golpe sordo de puerta pesada
+    const boom  = ctx.createOscillator();
+    const gBoom = ctx.createGain();
+    boom.type = 'sine';
+    boom.frequency.setValueAtTime(55, t);
+    boom.frequency.exponentialRampToValueAtTime(18, t + 0.4);
+    gBoom.gain.setValueAtTime(0.7, t);
+    gBoom.gain.exponentialRampToValueAtTime(0.001, t + 0.4);
+    boom.connect(gBoom); gBoom.connect(ctx.destination);
+    boom.start(t); boom.stop(t + 0.4);
+
+    // Chirrido principal de bisagras (barrido descendente)
+    const creak  = ctx.createOscillator();
+    creak.type   = 'sawtooth';
+    creak.frequency.setValueAtTime(260, t + 0.1);
+    creak.frequency.exponentialRampToValueAtTime(55, t + 2.0);
+
+    const ws    = ctx.createWaveShaper();
+    const curve = new Float32Array(256);
+    for (let j = 0; j < 256; j++) {
+      const x = (j * 2) / 255 - 1;
+      curve[j] = (Math.PI + 180) * x / (Math.PI + 180 * Math.abs(x));
+    }
+    ws.curve = curve;
+
+    const lp    = ctx.createBiquadFilter();
+    lp.type = 'lowpass'; lp.frequency.value = 900;
+
+    const gC    = ctx.createGain();
+    gC.gain.setValueAtTime(0, t + 0.1);
+    gC.gain.linearRampToValueAtTime(0.35, t + 0.3);
+    gC.gain.setValueAtTime(0.35, t + 1.5);
+    gC.gain.exponentialRampToValueAtTime(0.001, t + 2.0);
+    creak.connect(ws); ws.connect(lp); lp.connect(gC); gC.connect(ctx.destination);
+    creak.start(t + 0.1); creak.stop(t + 2.0);
+
+    // Segunda voz del chirrido (armónico)
+    const creak2  = ctx.createOscillator();
+    creak2.type   = 'sawtooth';
+    creak2.frequency.setValueAtTime(390, t + 0.25);
+    creak2.frequency.exponentialRampToValueAtTime(80, t + 2.2);
+    const gC2     = ctx.createGain();
+    gC2.gain.setValueAtTime(0, t + 0.25);
+    gC2.gain.linearRampToValueAtTime(0.18, t + 0.45);
+    gC2.gain.exponentialRampToValueAtTime(0.001, t + 2.2);
+    creak2.connect(ws); ws.connect(gC2); gC2.connect(ctx.destination);
+    creak2.start(t + 0.25); creak2.stop(t + 2.2);
+  } catch(e) {}
+}
+
 // ─── Door animation ──────────────────────────────────────────
 
 function showDoorOpening() {
   document.getElementById('app').innerHTML = `
     <div class="screen door-screen">
-      <div class="door-text">La puerta cruje.</div>
+      <div class="door-text">La puerta cede.</div>
       <div class="door-locks" id="door-locks">
         <span class="lock">█</span>
         <span class="lock">█</span>
@@ -382,14 +478,17 @@ function showDoorOpening() {
   const locks = document.querySelectorAll('.lock');
   let i = 0;
   const iv = setInterval(() => {
-    if (i < locks.length) { locks[i].textContent = '░'; locks[i].classList.add('unlocked'); i++; }
-    else {
+    if (i < locks.length) {
+      playCandadoClick();
+      locks[i].textContent = '░'; locks[i].classList.add('unlocked'); i++;
+    } else {
       clearInterval(iv);
+      playDoorCreak();
       document.getElementById('door-status').textContent = '[CANDADO LIBERADO]';
       document.getElementById('door-adv').textContent    = 'Avanzando...';
-      setTimeout(advanceRoom, 1200);
+      setTimeout(advanceRoom, 1800);
     }
-  }, 300);
+  }, 320);
 }
 
 function advanceRoom() {
