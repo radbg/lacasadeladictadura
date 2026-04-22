@@ -150,12 +150,10 @@ html, body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
   position: relative;
 }
 
-/* ── Top bar — gradient fading into image ──────────────── */
+/* ── Top bar — gradient overlay at top ─────────────────── */
 .room-top-bar {
   background: linear-gradient(
     to bottom,
@@ -164,41 +162,39 @@ html, body {
     transparent      100%
   );
   padding: 18px 24px 48px;
-  position: sticky;
+  position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 10;
 }
 
-/* ── Middle scene — image shows through ────────────────── */
+/* ── Middle scene — ambience text bottom-left ───────────── */
 .room-scene {
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  align-items: flex-end;
-  padding: 0 24px 16px;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 50%,
-    rgba(0,0,0,0.35) 100%
-  );
+  display: none;
 }
 
-/* ── Bottom panel — questions ───────────────────────────── */
+/* ── Floating question panel — centered over image ──────── */
 .room-bottom-panel {
-  background: rgba(6,5,3,0.68);
-  border-top: 1px solid var(--gold-border);
-  padding: 20px 24px 28px;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(780px, 88%);
+  z-index: 5;
+  background: rgba(6, 5, 3, 0.92);
+  border: 1px solid var(--gold-border);
+  border-radius: 4px;
+  padding: 28px 36px 32px;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  max-height: 72vh;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.7);
 }
 .room-bottom-panel > * {
   width: 100%;
-  max-width: 780px;
+  max-width: none;
 }
 
 /* ── Room header ─────────────────────────────────────────── */
@@ -383,14 +379,7 @@ html, body {
 /* ══════════════════════════════════════════════════════════
    LIBRARY
    ══════════════════════════════════════════════════════════ */
-.library-bg .room-scene {
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0,0,0,0.45) 60%,
-    rgba(80,60,20,0.4) 100%
-  );
-}
+.library-bg .room-scene { display: none; }
 
 .library-label {
   font-size: 12px;
